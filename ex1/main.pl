@@ -5,12 +5,18 @@
 :- set_prolog_flag( single_var_warnings,off ).
 :- set_prolog_flag( unknown,fail ).
 
+% PROLOG declarations
+
+:- op( 900,xfy,'::' ).
+:- dynamic adjudicante/4.
+:- dynamic adjudicataria/4.
+:- dynamic contrato/9.
 
 % Extensão do predicado adjudicante: #IdAd, Nome, NIF, Morada -> {V, F, D}
 adjudicante(1, 'Município de Alto de Basto', 705330336, 'Portugal,Braga, Alto de Basto').
 
 % Extensão do predicado adjudicatária: #IdAda, Nome, NIF, Morada -> {V, F, D}
-adjudicataria(1, 'XXX - Associados - Sociedade de Advogados, SP, RL.', 702675112, 'Portugal')
+adjudicataria(1, 'XXX - Associados - Sociedade de Advogados, SP, RL.', 702675112, 'Portugal').
 
 % Extensão do predicado contrato:
 % #IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Custo, Prazo, Local, Data
