@@ -32,6 +32,12 @@ contrato( 705330336, 702675112
         , 300, 'alto de basto', '11-02-2020').
 
 
+% Invariante : Verifica que os tipos de procedimento são válidos
+% 'ajuste direto' ,'consulta previa' ,'concurso publico'
++contrato(_, _, _, _, _, _, _, _, _) ::
+    (findall(TP, contrato(_, _, _, TP, _, _, _, _, _), L),
+    elemL(L, ['ajuste direto' ,'consulta previa' ,'concurso publico'])).
+
 % Invariante : Contrato por ajuste direto tem que ter valor igual ou inferior a 5000€
 +contrato(_, _, _, _, _, _, _, _, _) ::
     (findall(Val, contrato(_, _, _, 'ajuste direto', _, Val, _, _, _), L),
@@ -47,6 +53,30 @@ contrato( 705330336, 702675112
 +contrato(_, _, _, _, _, _, _, _, _) ::
     (findall(Pzo, contrato(_, _, _, 'ajuste direto', _, _, Pzo, _, _), L),
     lesseq_than(365, L)).
+
+% Invariante : Regra dos 3 anos
+
+% findall([Ad, Tp, Val, Data], contrato(Ad, _, _, Tp, _, _, _, _, Data), L).
+
+% insert_3yrule([Ad, Tp, Val], [], [Ad, [Tp, Val]]).
+% insert_3yrule([Ad, Tp, Val], [], [Ad, [Tp, Val]]).
+
+% filter_date_2y([[a,1,2,1-2-2018], [b,2,3,1-1-2018], [c,4,5,1-1-2019], [d,5,6,1-1-2020]], 15-1-2020, L).
+filter_date_2y([], Date, []).
+filter_date_2y([[Ad, Tp, Val, Date1]|Xs], Date2, [[Ad, Tp, Val]|FXs]) :-
+    diff_date(Date2, Date1, Days),
+    Days > 0,
+    Days =< 730,
+    filter_date_2y(Xs, Date2, FXs).
+filter_date_2y([[Ad, Tp, Val, Date1]|Xs], Date2, FXs) :-
+    diff_date(Date2, Date1, Days),
+    Days > 0,
+    filter_date_2y(Xs, Date2, FXs).
+
+diff_date(D1-M1-Y1, D2-M2-Y2, Days) :-
+    Days is  D1 - D2 +
+            (M1 - M2)*30 +
+            (Y1 - Y2)*365.
 
 % Testa se todos os elementos de uma lista são menores do que um elemento
 lesseq_than(N, []).
