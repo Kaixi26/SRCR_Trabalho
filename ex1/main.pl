@@ -24,12 +24,12 @@ adjudicataria(1, 'xxx - associados - sociedade de advogados, sp, rl.', 702675112
 contrato( 705330336, 702675112
         , 'aquisicao de servicos', 'consulta previa'
         , 'assessoria juridica', 13599
-        , 547, 'alto de basto', '11-02-2020').
+        , 547, 'alto de basto', 11-02-2020).
 
 contrato( 705330336, 702675112
         , 'aquisicao de servicos', 'ajuste direto'
         , 'assessoria juridica', 400
-        , 300, 'alto de basto', '11-02-2020').
+        , 300, 'alto de basto', 11-02-2020).
 
 
 % Invariante : Verifica que os tipos de procedimento são válidos
