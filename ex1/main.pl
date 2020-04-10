@@ -1,9 +1,13 @@
 
 % SICStus flags
 
-:- set_prolog_flag( discontiguous_warnings,off ).
-:- set_prolog_flag( single_var_warnings,off ).
-:- set_prolog_flag( unknown,fail ).
+:- style_check(-singleton).
+:- style_check(-discontiguous).
+
+
+%:- set_prolog_flag( discontiguous_warnings,off ).
+%:- set_prolog_flag( single_var_warnings,off ).
+%:- set_prolog_flag( unknown,fail ).
 
 % PROLOG declarations
 
@@ -19,7 +23,7 @@ adjudicante(1, 'município de alto de basto', 705330336, 'portugal,braga, alto d
 adjudicataria(1, 'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal').
 
 % Extensão do predicado contrato:
-% #IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Custo, Prazo, Local, Data
+% #IdAd, #IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Custo, Prazo, Local, Data
 %    -> {V, F, D}
 contrato( 705330336, 702675112
         , 'aquisicao de servicos', 'consulta previa'
@@ -55,6 +59,15 @@ contrato( 705330336, 702675112
     lesseq_than(365, L)).
 
 % Invariante : Regra dos 3 anos
++contrato(Ad, Ada, _, _, Desc, _, _, _, Date) ::
+    (findall(temp(Custo, Date, OldDate), contrato(Ad, Ada, _, _, Desc, Custo, _, _, OldDate), S), aux(S, R), add(R, V), V < 75000).
+
+aux([], []).
+aux([temp(Custo, Date, OldDate)|T], aux(T)) :- diff_years(Date, OldDate, D), D > 2.
+aux([temp(Custo, _, _)|T], [Custo|aux(T)]). 
+
+add([], SUM) :- SUM is 0.
+add([H|T], SUM) :- add(T, X), SUM is H + X.
 
 % findall([Ad, Tp, Val, Data], contrato(Ad, _, _, Tp, _, _, _, _, Data), L).
 
@@ -73,10 +86,8 @@ filter_date_2y([[Ad, Tp, Val, Date1]|Xs], Date2, FXs) :-
     Days > 0,
     filter_date_2y(Xs, Date2, FXs).
 
-diff_date(D1-M1-Y1, D2-M2-Y2, Days) :-
-    Days is  D1 - D2 +
-            (M1 - M2)*30 +
-            (Y1 - Y2)*365.
+diff_years(D1-M1-Y1, D2-M2-Y2, Years) :-
+    Years is (Y1 - Y2).
 
 % Testa se todos os elementos de uma lista são menores do que um elemento
 lesseq_than(N, []).
