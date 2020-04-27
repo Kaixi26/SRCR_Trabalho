@@ -14,7 +14,7 @@
 :- op( 900,xfy,'::' ).
 :- dynamic adjudicante/4.
 :- dynamic adjudicataria/4.
-:- dynamic contrato/9.
+:- dynamic contrato/10.
 
 % Extensão do predicado adjudicante: #IdAd, Nome, NIF, Morada -> {V, F, D}
 adjudicante(1, 'município de alto de basto', 705330336, 'portugal,braga, alto de basto').
@@ -23,14 +23,14 @@ adjudicante(1, 'município de alto de basto', 705330336, 'portugal,braga, alto d
 adjudicataria(1, 'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal').
 
 % Extensão do predicado contrato:
-% #IdAd, #IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Custo, Prazo, Local, Data
+% #IdContrato, #IdAd, #IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Custo, Prazo, Local, Data
 %    -> {V, F, D}
-contrato( 705330336, 702675112
+contrato( 1, 705330336, 702675112
         , 'aquisicao de servicos', 'consulta previa'
         , 'assessoria juridica', 13599
         , 547, 'alto de basto', 11-02-2020).
 
-contrato( 705330336, 702675112
+contrato( 2, 705330336, 702675112
         , 'aquisicao de servicos', 'ajuste direto'
         , 'assessoria juridica', 400
         , 300, 'alto de basto', 11-02-2020).
@@ -38,29 +38,29 @@ contrato( 705330336, 702675112
 
 % Invariante : Verifica que os tipos de procedimento são válidos
 % 'ajuste direto' ,'consulta previa' ,'concurso publico'
-+contrato(_, _, _, _, _, _, _, _, _) ::
-    (findall(TP, contrato(_, _, _, TP, _, _, _, _, _), L),
++contrato(_, _, _, _, _, _, _, _, _, _) ::
+    (findall(TP, contrato(_, _, _, _, TP, _, _, _, _, _), L),
     elemL(L, ['ajuste direto' ,'consulta previa' ,'concurso publico'])).
 
 % Invariante : Contrato por ajuste direto tem que ter valor igual ou inferior a 5000€
-+contrato(_, _, _, _, _, _, _, _, _) ::
-    (findall(Val, contrato(_, _, _, 'ajuste direto', _, Val, _, _, _), L),
++contrato(_, _, _, _, _, _, _, _, _, _) ::
+    (findall(Val, contrato(_, _, _, _, 'ajuste direto', _, Val, _, _, _), L),
     lesseq_than(5000, L)).
 
 % Invariante : Contrato por ajuste direto tem que ser do tipo 'aquisicao de servicos',
 % 'aquisicao de bens moveis' ou 'locacao de bens moveis'
-+contrato(_, _, _, _, _, _, _, _, _) ::
-    (findall(TC, contrato(_, _, TC, 'ajuste direto', _, _, _, _, _), L),
++contrato(_, _, _, _, _, _, _, _, _, _) ::
+    (findall(TC, contrato(_, _, _, TC, 'ajuste direto', _, _, _, _, _), L),
     elemL(L, ['aquisicao de servicos', 'aquisicao de bens moveis', 'locacao de bens moveis'])).
 
 % Invariante : Contrato por ajuste direto tem que ter prazo ate 1 ano
-+contrato(_, _, _, _, _, _, _, _, _) ::
-    (findall(Pzo, contrato(_, _, _, 'ajuste direto', _, _, Pzo, _, _), L),
++contrato(_, _, _, _, _, _, _, _, _, _) ::
+    (findall(Pzo, contrato(_, _, _, _, 'ajuste direto', _, _, Pzo, _, _), L),
     lesseq_than(365, L)).
 
 % Invariante : Regra dos 3 anos
-+contrato(Ad, Ada, _, _, Desc, _, _, _, Date) ::
-    (findall(temp(Custo, Date, OldDate), contrato(Ad, Ada, _, _, Desc, Custo, _, _, OldDate), S), aux(S, R), add(R, V), V < 75000).
++contrato(_, Ad, Ada, _, _, Desc, _, _, _, Date) ::
+    (findall(temp(Custo, Date, OldDate), contrato(_, Ad, Ada, _, _, Desc, Custo, _, _, OldDate), S), aux(S, R), add(R, V), V < 75000).
 
 aux([], []).
 aux([temp(Custo, Date, OldDate)|T], aux(T)) :- diff_years(Date, OldDate, D), D > 2.
@@ -69,7 +69,7 @@ aux([temp(Custo, _, _)|T], [Custo|aux(T)]).
 add([], SUM) :- SUM is 0.
 add([H|T], SUM) :- add(T, X), SUM is H + X.
 
-% findall([Ad, Tp, Val, Data], contrato(Ad, _, _, Tp, _, _, _, _, Data), L).
+% findall([Ad, Tp, Val, Data], contrato(_, Ad, _, _, Tp, _, _, _, _, Data), L).
 
 % insert_3yrule([Ad, Tp, Val], [], [Ad, [Tp, Val]]).
 % insert_3yrule([Ad, Tp, Val], [], [Ad, [Tp, Val]]).
