@@ -18,8 +18,10 @@
 
 % Extensão do predicado adjudicante: #IdAd, Nome, NIF, Morada -> {V, F, D}
 adjudicante(1, 'município de alto de basto', 705330336, 'portugal,braga, alto de basto').
+adjudicante(2, 'município de alto de basto', 705330336, 'portugal,braga, alto de basto').
 
 % Extensão do predicado adjudicatária: #IdAda, Nome, NIF, Morada -> {V, F, D}
+adjudicataria(1, 'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal').
 adjudicataria(1, 'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal').
 
 % Extensão do predicado contrato:
@@ -30,10 +32,24 @@ contrato( 1, 705330336, 702675112
         , 'assessoria juridica', 13599
         , 547, 'alto de basto', 11-02-2020).
 
-contrato( 2, 705330336, 702675112
+contrato( 1, 705330336, 702675112
         , 'aquisicao de servicos', 'ajuste direto'
         , 'assessoria juridica', 400
         , 300, 'alto de basto', 11-02-2020).
+
+% Invariante : Verifica que não existe mais que um id sem clausulas desconhecidas
++adjudicante(_, _, _, _) ::
+    (findall(Id, demo(adjudicante(Id, _, _, _), verdadeiro), L),
+    remRep(L, Lnonrep),
+    eqList(L, Lnonrep)).
++adjudicataria(_, _, _, _) ::
+    (findall(Id, demo(adjudicataria(Id, _, _, _), verdadeiro), L),
+    remRep(L, Lnonrep),
+    eqList(L, Lnonrep)).
+contrato(Id, _, _, _, _, _, _, _, _, _) ::
+    (findall(Id, demo(contrato(Id, _, _, _, _, _, _, _, _, _), verdadeiro), L),
+    remRep(L, Lnonrep),
+    eqList(L, Lnonrep)).
 
 
 % Invariante : Verifica que os tipos de procedimento são válidos
@@ -105,3 +121,37 @@ elemL([], L).
 elemL([LE|LES], L) :-
     elem(LE, L),
     elemL(LES, L).
+
+% Remove os elementos repetidos de uma lista
+ remRep([], []).
+ remRep([L|Ls], [L|Lret]) :-
+     remElem(L, Ls, Tmp),
+     remRep(Tmp, Lret).
+
+% Remove todas as ocorrencias de um elemento numa lista
+remElem(E, [], []).
+remElem(E, [E|Ls], Lr) :- remElem(E, Ls, Lr).
+remElem(E, [L|Ls], [L|Lr]) :- E \= L, remElem(E, Ls, Lr).
+
+% Testa se duas listas são iguais
+eqList([], []).
+eqList([L1|Ls1], [L1|Ls2]) :- eqList(Ls1, Ls2).
+eqList([L1|_], [L2|_]) :- fail.
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do meta-predicado demo: Questao,Resposta -> {V,F}
+%                            Resposta = { verdadeiro,falso,desconhecido }
+demo( Questao,verdadeiro ) :-
+    Questao.
+demo( Questao,falso ) :-
+    -Questao.
+demo( Questao,desconhecido ) :-
+    nao( Questao ),
+    nao( -Questao ).
+
+%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% Extensao do meta-predicado nao: Questao -> {V,F}
+
+nao( Questao ) :-
+    Questao, !, fail.
+nao( Questao ).
