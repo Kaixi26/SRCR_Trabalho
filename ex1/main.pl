@@ -22,7 +22,7 @@ adjudicante(2, 'município de alto de basto', 705330336, 'portugal,braga, alto d
 
 % Extensão do predicado adjudicatária: #IdAda, Nome, NIF, Morada -> {V, F, D}
 adjudicataria(1, 'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal').
-adjudicataria(1, 'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal').
+adjudicataria(2, 'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal').
 
 % Extensão do predicado contrato:
 % #IdContrato, #IdAd, #IdAda, TipoDeContrato, TipoDeProcedimento, Descrição, Custo, Prazo, Local, Data
@@ -32,7 +32,7 @@ contrato( 1, 705330336, 702675112
         , 'assessoria juridica', 13599
         , 547, 'alto de basto', 11-02-2020).
 
-contrato( 1, 705330336, 702675112
+contrato( 2, 705330336, 702675112
         , 'aquisicao de servicos', 'ajuste direto'
         , 'assessoria juridica', 400
         , 300, 'alto de basto', 11-02-2020).
