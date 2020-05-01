@@ -69,27 +69,27 @@ adjudicataria(21, 'xxx - associados - sociedade de auxiliares, sp, rl.',    7026
 % Extensão do predicado contrato:
 % #IdContrato, #IdAd, #IdAda, TipoDeContrato, TipoDeProcedimento, Descricão, Custo, Prazo, Local, Data
 %    -> {V, F, D}
-contrato(1,  1,  21, 'aquisicao de servicos',                 'consulta previa'  , 'assessoria juridica',      13599  , 547, 'alto de basto',         11-01-2020).
-contrato(2,  2,  20, 'aquisicao de servicos',                 'ajuste direto'    , 'assessoria juridica',      400    , 300, 'ponte de lima',         12-02-2020).
-contrato(3,  3,  19, 'aquisicao de servicos',                 'concurso publico' , 'assessoria juridica',      1600   , 200, 'ponte da barca',        13-03-2020).
-contrato(4,  4,  18, 'aquisicao de servicos',                 'consulta previa'  , 'assessoria juridica',      300    , 360, 'arcos de valdevez',     14-04-2020).
-contrato(5,  5,  17, 'aquisicao de servicos',                 'ajuste direto'    , 'assessoria juridica',      200    , 100, 'viana de castelo',      15-05-2019).
-contrato(6,  6,  16, 'aquisicao ou locacao de bens imoveis',  'concurso publico' , 'assessoria juridica',      40530  , 500, 'caminha',               16-06-2018).
-contrato(7,  7,  15, 'aquisicao ou locacao de bens imoveis',  'consulta previa'  , 'assessoria juridica',      1999   , 547, 'moncao',                17-07-2018).
-contrato(8,  8,  14, 'aquisicao ou locacao de bens imoveis',  'ajuste direto'    , 'assessoria juridica',      30     , 280, 'melgaco',               18-08-2019).
-contrato(9,  9,  13, 'aquisicao ou locacao de bens imoveis',  'concurso publico' , 'assessoria juridica',      799    , 657, 'valenca',               19-09-2017).
-contrato(10, 10, 12, 'aquisicao ou locacao de bens imoveis',  'consulta previa'  , 'assessoria juridica',      8900   , 90,  'vila praia de ancora',  20-10-2018).
-contrato(11, 11, 11, 'aquisicao ou locacao de bens imoveis',  'ajuste direto'    , 'aquisicao de equipametos', 1500   , 79,  'paredes de coura',      21-11-2019).
-contrato(12, 12, 10, 'contrato de sociedade',                 'concurso publico' , 'aquisicao de equipametos', 6701   , 890, 'vila nova de cerveira', 22-12-2017).
-contrato(13, 13, 9,  'contrato de sociedade',                 'consulta previa'  , 'aquisicao de equipametos', 30000  , 345, 'amares',                23-01-2018).
-contrato(14, 14, 8,  'aquisicao de servicos',                 'ajuste direto'    , 'aquisicao de equipametos', 4300   , 300, 'braga',                 24-02-2019).
-contrato(15, 15, 7,  'contrato de sociedade',                 'concurso publico' , 'aquisicao de equipametos', 25700  , 265, 'barcelos',              25-03-2017).
-contrato(16, 16, 6,  'contrato de sociedade',                 'consulta previa'  , 'aquisicao de equipametos', 19450  , 490, 'fafe',                  26-04-2018).
-contrato(17, 17, 5,  'aquisicao ou locacao de bens imoveis'   'ajuste direto'    , 'aquisicao de equipametos', 3700   , 310, 'guimaraes',             27-05-2019).
-contrato(18, 18, 4,  'concessao de obras publicas',           'concurso publico' , 'aquisicao de equipametos', 100000 , 123, 'esposende',             28-06-2017).
-contrato(19, 19, 3,  'concessao de obras publicas',           'consulta previa'  , 'aquisicao de equipametos', 9030   , 456, 'vieira do minho',       29-07-2018).
-contrato(20, 20, 2,  'aquisicao ou locacao de bens imoveis',  'ajuste direto'    , 'aquisicao de equipametos', 790    , 190, 'vizela',                30-08-2019).
-contrato(21, 21, 1,  'concessao de obras publicas',           'concurso publico' , 'aquisicao de equipametos', 12345  , 789, 'vila verde',            30-09-2019).
+contrato(1,  1,  21, 'aquisicao de servicos'    , 'consulta previa'  , 'assessoria juridica',      13599  , 547, 'alto de basto',         11-01-2020).
+contrato(2,  2,  20, 'aquisicao de servicos'    , 'ajuste direto'    , 'assessoria juridica',      400    , 300, 'ponte de lima',         12-02-2020).
+contrato(3,  3,  19, 'aquisicao de servicos'    , 'concurso publico' , 'assessoria juridica',      1600   , 200, 'ponte da barca',        13-03-2020).
+contrato(4,  4,  18, 'aquisicao de servicos'    , 'consulta previa'  , 'assessoria juridica',      300    , 360, 'arcos de valdevez',     14-04-2020).
+contrato(5,  5,  17, 'aquisicao de servicos'    , 'ajuste direto'    , 'assessoria juridica',      200    , 100, 'viana de castelo',      15-05-2019).
+contrato(6,  6,  16, 'aquisicao de bens moveis' , 'concurso publico' , 'assessoria juridica',      40530  , 500, 'caminha',               16-06-2018).
+contrato(7,  7,  15, 'aquisicao de bens moveis' , 'consulta previa'  , 'assessoria juridica',      1999   , 547, 'moncao',                17-07-2018).
+contrato(8,  8,  14, 'aquisicao de bens moveis' , 'ajuste direto'    , 'assessoria juridica',      30     , 280, 'melgaco',               18-08-2019).
+contrato(9,  9,  13, 'aquisicao de bens moveis' , 'concurso publico' , 'assessoria juridica',      799    , 657, 'valenca',               19-09-2017).
+contrato(10, 10, 12, 'aquisicao de bens moveis' , 'consulta previa'  , 'assessoria juridica',      8900   , 90,  'vila praia de ancora',  20-10-2018).
+contrato(11, 11, 11, 'aquisicao de bens moveis' , 'ajuste direto'    , 'aquisicao de equipametos', 1500   , 79,  'paredes de coura',      21-11-2019).
+contrato(12, 12, 10, 'aquisicao de bens moveis' , 'concurso publico' , 'aquisicao de equipametos', 6701   , 890, 'vila nova de cerveira', 22-12-2017).
+contrato(13, 13, 9,  'aquisicao de bens moveis' , 'consulta previa'  , 'aquisicao de equipametos', 30000  , 345, 'amares',                23-01-2018).
+contrato(14, 14, 8,  'aquisicao de bens moveis' , 'ajuste direto'    , 'aquisicao de equipametos', 4300   , 300, 'braga',                 24-02-2019).
+contrato(15, 15, 7,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipametos', 25700  , 265, 'barcelos',              25-03-2017).
+contrato(16, 16, 6,  'locacao de bens moveis'   , 'consulta previa'  , 'aquisicao de equipametos', 19450  , 490, 'fafe',                  26-04-2018).
+contrato(17, 17, 5,  'locacao de bens moveis'   , 'ajuste direto'    , 'aquisicao de equipametos', 3700   , 310, 'guimaraes',             27-05-2019).
+contrato(18, 18, 4,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipametos', 100000 , 123, 'esposende',             28-06-2017).
+contrato(19, 19, 3,  'locacao de bens moveis'   , 'consulta previa'  , 'aquisicao de equipametos', 9030   , 456, 'vieira do minho',       29-07-2018).
+contrato(20, 20, 2,  'locacao de bens moveis'   , 'ajuste direto'    , 'aquisicao de equipametos', 790    , 190, 'vizela',                30-08-2019).
+contrato(21, 21, 1,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipametos', 12345  , 789, 'vila verde',            30-09-2019).
 
 
 
@@ -162,34 +162,40 @@ diff_years(D1-M1-Y1, D2-M2-Y2, Years) :-
     Years is (Y1 - Y2).
 
 % Testa se todos os elementos de uma lista são menores do que um elemento
+% lesseq_than: Valor, Lista -> {V, F}
 lesseq_than(N, []).
 lesseq_than(N, [H|T]) :-
     H =< N,
     lesseq_than(N, T).
 
 % Testa se um elemento está na lista
+% elem: Elemento, Lista -> {V, F}
 elem(E, []) :- fail.
 elem(E, [E|_]).
 elem(E, [_|T]) :- elem(E, T).
 
 % Testa se todos os elementos da primeira lista pertencem à segunda lista
+% elemL: Lista, Lista -> {V, F}
 elemL([], L).
 elemL([LE|LES], L) :-
     elem(LE, L),
     elemL(LES, L).
 
 % Remove os elementos repetidos de uma lista
+% remRep: Lista, Resultado -> {V,F}
  remRep([], []).
  remRep([L|Ls], [L|Lret]) :-
      remElem(L, Ls, Tmp),
      remRep(Tmp, Lret).
 
 % Remove todas as ocorrencias de um elemento numa lista
+% remElem: Elemento, Lista, Resultado -> {V, F}
 remElem(E, [], []).
 remElem(E, [E|Ls], Lr) :- remElem(E, Ls, Lr).
 remElem(E, [L|Ls], [L|Lr]) :- E \= L, remElem(E, Ls, Lr).
 
 % Testa se duas listas são iguais
+% eqList: Lista, Lista -> {V, F}
 eqList([], []).
 eqList([L1|Ls1], [L1|Ls2]) :- eqList(Ls1, Ls2).
 eqList([L1|_], [L2|_]) :- fail.
@@ -227,48 +233,108 @@ total_contratos_adjudicante(IdAdj, Res) :-
     contratos_adjudicante(IdAdj, L),
     length(L, Res).
 
-% predicado que devolve o número total de contratos de um tipo
-% total_contratos_adjudicante: Tipo, Resultado -> {V,F}
-total_contratos_tipo(IdAdj, Res) :- 
-    contratos_tipo(IdAdj, L),
-    length(L, Res).
-
-% predicado que devolve o número total de contratos de uma adjuditaria
+% predicado que devolve o número total de contratos de uma adjudicataria
 % total_contratos_adjudicataria: IdAdj, Resultado -> {V,F}
 total_contratos_adjudicataria(IdAdj, Res) :- 
     contratos_adjudicataria(IdAdj, L),
     length(L, Res).
 
+% predicado que devolve o número total de contratos de um tipo
+% total_contratos_tipo: Tipo, Resultado -> {V,F}
+total_contratos_tipo(Tipo, Res) :- 
+    contratos_tipo(Tipo, L),
+    length(L, Res).
+
+
+% predicado que devolve o número total de contratos de um tipo de procedimento
+% total_contratos_tipo_procedimento: Tipo, Resultado -> {V,F}
+total_contratos_tipo_procedimento(Tipo, Res) :- 
+    contratos_tipo_procedimento(Tipo, L),
+    length(L, Res).
+
+% predicado que devolve o número total de contratos com valor acima de
+% total_contratos_acima: Valor, Resultado -> {V,F}
+total_contratos_valor_acima(Valor, Res) :- 
+    contratos_valor_acima(Valor, L),
+    length(L, Res).
+
+% predicado que devolve o número total de contratos com valor acima de
+% total_contratos_abaixo: Valor, Resultado -> {V,F}
+total_contratos_valor_abaixo(Valor, Res) :- 
+    contratos_valor_abaixo(Valor, L),
+    length(L, Res).
+
+% predicado que devolve o número total de contratos com prazo acima de
+% total_contratos_prazo_acima: Prazo, Resultado -> {V,F}
+total_contratos_prazo_acima(Valor, Res) :- 
+    contratos_prazo_acima(Valor, L),
+    length(L, Res).
+
+% predicado que devolve o número total de contratos com prazo abaixo de
+% total_contratos_prazo_abaixo: Prazo, Resultado -> {V,F}
+total_contratos_prazo_abaixo(Valor, Res) :- 
+    contratos_prazo_abaixo(Valor, L),
+    length(L, Res).
+
 % predicado que devolve contratos apos uma data
 % contratos_apos_data: Data, Resultado -> {V,F}
 contratos_apos(Date, Res) :-
-    findall(contrato(A, B, C, D, E, F, G, H, I, CDate), contrato(A, B, C, D, E, F, G, H, I, CDate), L),
+    findall(contrato(A, B, C, D, E, F, G, H, I, CDate), demo(contrato(A, B, C, D, E, F, G, H, I, CDate), verdadeiro), L),
     filter_date_is_after(Date, L, Res).
 
 % predicado que devolve contratos apos uma data
 % contratos_apos_data: Data, Resultado -> {V,F}
 contratos_antes(Date, Res) :-
-    findall(contrato(A, B, C, D, E, F, G, H, I, CDate), contrato(A, B, C, D, E, F, G, H, I, CDate), L),
+    findall(contrato(A, B, C, D, E, F, G, H, I, CDate), demo(contrato(A, B, C, D, E, F, G, H, I, CDate), verdadeiro), L),
     filter_date_is_before(Date, L, Res).
 
 % predicado que devolve contratos de um adjudicante
 % contratos_adjudicante: IdAd, Resultado -> {V,F}
 contratos_adjudicante(IdAd, Res) :-
-    findall(contrato(A, B, C, D, E, F, G, H, I, J), contrato(A, B, C, D, E, F, G, H, I, J), L),
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
     filter_contrato_adjudicante(IdAd, L, Res).
 
 % predicado que devolve contratos de uma adjudicataria
 % contratos_adjudicante: IdAd, Resultado -> {V,F}
 contratos_adjudicataria(IdAd, Res) :-
-    findall(contrato(A, B, C, D, E, F, G, H, I, J), contrato(A, B, C, D, E, F, G, H, I, J), L),
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
     filter_contrato_adjudicataria(IdAd, L, Res).
 
 % predicado que devolve contratos de um tipo
-% contratos_tipo: IdAd, Resultado -> {V,F}
+% contratos_tipo: Tipo, Resultado -> {V,F}
 contratos_tipo(Tipo, Res) :-
-    findall(contrato(A, B, C, D, E, F, G, H, I, J), contrato(A, B, C, D, E, F, G, H, I, J), L),
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
     filter_contrato_tipo(Tipo, L, Res).
 
+% predicado que devolve contratos de um tipo de procedimento
+% contratos_tipo_procedimento: Tipo, Resultado -> {V,F}
+contratos_tipo_procedimento(Tipo, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
+    filter_contrato_tipo_procedimento(Tipo, L, Res).
+
+% predicado que devolve contratos acima de um valor
+% contratos_valor_acima: Tipo, Resultado -> {V,F}
+contratos_valor_acima(Valor, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
+    filter_contrato_valor_acima(Valor, L, Res).
+
+% predicado que devolve contratos abaixo de um valor
+% contratos_valor_abaixo: Valor, Resultado -> {V,F}
+contratos_valor_abaixo(Valor, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
+    filter_contrato_valor_abaixo(Valor, L, Res).
+
+% predicado que devolve contratos acima de um prazo
+% contratos_prazo_acima: Prazo, Resultado -> {V,F}
+contratos_prazo_acima(Prazo, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
+    filter_contrato_prazo_acima(Prazo, L, Res).
+
+% predicado que devolve contratos acima de um prazo
+% contratos_prazo_abaixo: Prazo, Resultado -> {V,F}
+contratos_prazo_abaixo(Prazo, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
+    filter_contrato_prazo_abaixo(Prazo, L, Res).
 
 % filtra de uma lista de contratos com apenas contratos após a data
 % filter_date_is_after: Data, Contratos, Resultado -> {V, F}
@@ -312,6 +378,50 @@ filter_contrato_tipo(Tipo, [contrato(A, B, C, Tipo, E, F, G, H, I, J)|Cs], [cont
     filter_contrato_tipo(Tipo, Cs, FCs).
 filter_contrato_tipo(Tipo, [_|Cs], FCs) :-
     filter_contrato_tipo(Tipo, Cs, FCs).
+
+% filtra de uma lista de contratos com apenas contratos de um tipo de procedimento
+% filter_contrato_tipo_procedimento: Tipo, Contratos, Resultado -> {V, F}
+filter_contrato_tipo_procedimento(Tipo, [], []).
+filter_contrato_tipo_procedimento(Tipo, [contrato(A, B, C, D, Tipo, F, G, H, I, J)|Cs], [contrato(A, B, C, D, Tipo, F, G, H, I, J)|FCs]) :-
+    filter_contrato_tipo_procedimento(Tipo, Cs, FCs).
+filter_contrato_tipo_procedimento(Tipo, [_|Cs], FCs) :-
+    filter_contrato_tipo_procedimento(Tipo, Cs, FCs).
+
+% filtra de uma lista de contratos com apenas contratos acima de um valor
+% filter_contrato_valor_acima: Valor, Contratos, Resultado -> {V, F}
+filter_contrato_valor_acima(Valor, [], []).
+filter_contrato_valor_acima(Valor, [contrato(A, B, C, D, E, F, Val, H, I, J)|Cs], [contrato(A, B, C, D, E, F, Val, H, I, J)|FCs]) :-
+    Val > Valor,
+    filter_contrato_valor_acima(Valor, Cs, FCs).
+filter_contrato_valor_acima(Tipo, [_|Cs], FCs) :-
+    filter_contrato_valor_acima(Tipo, Cs, FCs).
+
+% filtra de uma lista de contratos com apenas contratos abaixo de um valor
+% filter_contrato_valor_abaixo: Valor, Contratos, Resultado -> {V, F}
+filter_contrato_valor_abaixo(Valor, [], []).
+filter_contrato_valor_abaixo(Valor, [contrato(A, B, C, D, E, F, Val, H, I, J)|Cs], [contrato(A, B, C, D, E, F, Val, H, I, J)|FCs]) :-
+    Valor > Val,
+    filter_contrato_valor_abaixo(Valor, Cs, FCs).
+filter_contrato_valor_abaixo(Tipo, [_|Cs], FCs) :-
+    filter_contrato_valor_abaixo(Tipo, Cs, FCs).
+
+% filtra de uma lista de contratos com apenas contratos com prazo acima de um valor
+% filter_contrato_prazo_acima: Prazo, Contratos, Resultado -> {V, F}
+filter_contrato_prazo_acima(Prazo, [], []).
+filter_contrato_prazo_acima(Prazo, [contrato(A, B, C, D, E, F, G, Pzo, I, J)|Cs], [contrato(A, B, C, D, E, F, G, Pzo, I, J)|FCs]) :-
+    Prazo < Pzo,
+    filter_contrato_prazo_acima(Prazo, Cs, FCs).
+filter_contrato_prazo_acima(Prazo, [_|Cs], FCs) :-
+    filter_contrato_prazo_acima(Prazo, Cs, FCs).
+
+% filtra de uma lista de contratos com apenas contratos com prazo abaixo de um valor
+% filter_contrato_prazo_abaixo: Prazo, Contratos, Resultado -> {V, F}
+filter_contrato_prazo_abaixo(Prazo, [], []).
+filter_contrato_prazo_abaixo(Prazo, [contrato(A, B, C, D, E, F, G, Pzo, I, J)|Cs], [contrato(A, B, C, D, E, F, G, Pzo, I, J)|FCs]) :-
+    Pzo < Prazo,
+    filter_contrato_prazo_abaixo(Prazo, Cs, FCs).
+filter_contrato_prazo_abaixo(Prazo, [_|Cs], FCs) :-
+    filter_contrato_prazo_abaixo(Prazo, Cs, FCs).
 
 % predicado que calcula se a primeira data vem após a segunda
 % contratos_apos_data: Data, Data -> {V,F}
