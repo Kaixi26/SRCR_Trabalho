@@ -35,7 +35,7 @@ contrato( 1, 705330336, 702675112
 contrato( 2, 705330336, 702675112
         , 'aquisicao de servicos', 'ajuste direto'
         , 'assessoria juridica', 400
-        , 300, 'alto de basto', 11-02-2020).
+        , 300, 'alto de basto', 11-01-2020).
 
 % Invariante : Verifica que não existe mais que um id sem clausulas desconhecidas
 +adjudicante(_, _, _, _) ::
@@ -137,6 +137,131 @@ remElem(E, [L|Ls], [L|Lr]) :- E \= L, remElem(E, Ls, Lr).
 eqList([], []).
 eqList([L1|Ls1], [L1|Ls2]) :- eqList(Ls1, Ls2).
 eqList([L1|_], [L2|_]) :- fail.
+
+% predicado que devolve o número total de adjudicantes
+% total_adjudicantes: Resultado -> {V,F}
+total_adjudicantes(Tot) :- findall(Id, adjudicante(Id, _, _, _), L),
+    length(L, Tot).
+
+% predicado que devolve o número total de adjudicatarias
+% total_adjudicatarias: Resultado -> {V,F}
+total_adjudicatarias(Tot) :- findall(Id, adjudicataria(Id, _, _, _), L),
+    length(L, Tot).
+
+% predicado que devolve o número total de contratos
+% total_contratos: Resultado -> {V,F}
+total_contratos(Tot) :- findall(Id, contrato(Id, _, _, _, _, _, _, _, _, _), L),
+    length(L, Tot).
+
+% predicado que devolve o número total de contratos apos uma data
+% total_contratos_apos: Data, Resultado -> {V,F}
+total_contratos_apos(Date, Res) :- 
+    contratos_apos(Date, L),
+    length(L, Res).
+
+% predicado que devolve o número total de contratos antes de uma data
+% total_contratos_antes: Data, Resultado -> {V,F}
+total_contratos_antes(Date, Res) :- 
+    contratos_antes(Date, L),
+    length(L, Res).
+
+% predicado que devolve o número total de contratos de um adjudicante
+% total_contratos_adjudicante: IdAdj, Resultado -> {V,F}
+total_contratos_adjudicante(IdAdj, Res) :- 
+    contratos_adjudicante(IdAdj, L),
+    length(L, Res).
+
+% predicado que devolve o número total de contratos de um tipo
+% total_contratos_adjudicante: Tipo, Resultado -> {V,F}
+total_contratos_tipo(IdAdj, Res) :- 
+    contratos_tipo(IdAdj, L),
+    length(L, Res).
+
+% predicado que devolve o número total de contratos de uma adjuditaria
+% total_contratos_adjudicataria: IdAdj, Resultado -> {V,F}
+total_contratos_adjudicataria(IdAdj, Res) :- 
+    contratos_adjudicataria(IdAdj, L),
+    length(L, Res).
+
+% predicado que devolve contratos apos uma data
+% contratos_apos_data: Data, Resultado -> {V,F}
+contratos_apos(Date, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, CDate), contrato(A, B, C, D, E, F, G, H, I, CDate), L),
+    filter_date_is_after(Date, L, Res).
+
+% predicado que devolve contratos apos uma data
+% contratos_apos_data: Data, Resultado -> {V,F}
+contratos_antes(Date, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, CDate), contrato(A, B, C, D, E, F, G, H, I, CDate), L),
+    filter_date_is_before(Date, L, Res).
+
+% predicado que devolve contratos de um adjudicante
+% contratos_adjudicante: IdAd, Resultado -> {V,F}
+contratos_adjudicante(IdAd, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), contrato(A, B, C, D, E, F, G, H, I, J), L),
+    filter_contrato_adjudicante(IdAd, L, Res).
+
+% predicado que devolve contratos de uma adjudicataria
+% contratos_adjudicante: IdAd, Resultado -> {V,F}
+contratos_adjudicataria(IdAd, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), contrato(A, B, C, D, E, F, G, H, I, J), L),
+    filter_contrato_adjudicataria(IdAd, L, Res).
+
+% predicado que devolve contratos de um tipo
+% contratos_tipo: IdAd, Resultado -> {V,F}
+contratos_tipo(Tipo, Res) :-
+    findall(contrato(A, B, C, D, E, F, G, H, I, J), contrato(A, B, C, D, E, F, G, H, I, J), L),
+    filter_contrato_tipo(Tipo, L, Res).
+
+
+% filtra de uma lista de contratos com apenas contratos após a data
+% filter_date_is_after: Data, Contratos, Resultado -> {V, F}
+filter_date_is_after(Date, [], []).
+filter_date_is_after(Date, [contrato(A, B, C, D, E, F, G, H, I, CDate)|Cs], [contrato(A, B, C, D, E, F, G, H, I, CDate)|FCs]) :-
+    date_is_after(CDate, Date),
+    filter_date_is_after(Date, Cs, FCs).
+filter_date_is_after(Date, [_|Cs], FCs) :-
+    filter_date_is_after(Date, Cs, FCs).
+
+% filtra de uma lista de contratos com apenas contratos antes ou na data
+% filter_date_is_before: Data, Contratos, Resultado -> {V, F}
+filter_date_is_before(Date, [], []).
+filter_date_is_before(Date, [contrato(A, B, C, D, E, F, G, H, I, CDate)|Cs], [contrato(A, B, C, D, E, F, G, H, I, CDate)|FCs]) :-
+    \+ date_is_after(CDate, Date),
+    filter_date_is_before(Date, Cs, FCs).
+filter_date_is_before(Date, [_|Cs], FCs) :-
+    filter_date_is_before(Date, Cs, FCs).
+
+% filtra de uma lista de contratos com apenas contratos de um adjudicante
+% filter_contrato_adjudicante: Adjudicantes, Contratos, Resultado -> {V, F}
+filter_contrato_adjudicante(IdAdj, [], []).
+filter_contrato_adjudicante(IdAdj, [contrato(A, IdAdj, C, D, E, F, G, H, I, J)|Cs], [contrato(A, IdAdj, C, D, E, F, G, H, I, J)|FCs]) :-
+    filter_contrato_adjudicante(IdAdj, Cs, FCs).
+filter_contrato_adjudicante(IdAdj, [_|Cs], FCs) :-
+    filter_contrato_adjudicante(IdAdj, Cs, FCs).
+
+
+% filtra de uma lista de contratos com apenas contratos de uma adjudicatária
+% filter_contrato_adjudicataria: Adjudicantes, Contratos, Resultado -> {V, F}
+filter_contrato_adjudicataria(IdAdj, [], []).
+filter_contrato_adjudicataria(IdAdj, [contrato(A, B, IdAdj, D, E, F, G, H, I, J)|Cs], [contrato(A, B, IdAdj, D, E, F, G, H, I, J)|FCs]) :-
+    filter_contrato_adjudicataria(IdAdj, Cs, FCs).
+filter_contrato_adjudicataria(IdAdj, [_|Cs], FCs) :-
+    filter_contrato_adjudicataria(IdAdj, Cs, FCs).
+
+% filtra de uma lista de contratos com apenas contratos de um tipo
+% filter_contrato_tipo: Tipo, Contratos, Resultado -> {V, F}
+filter_contrato_tipo(Tipo, [], []).
+filter_contrato_tipo(Tipo, [contrato(A, B, C, Tipo, E, F, G, H, I, J)|Cs], [contrato(A, B, C, Tipo, E, F, G, H, I, J)|FCs]) :-
+    filter_contrato_tipo(Tipo, Cs, FCs).
+filter_contrato_tipo(Tipo, [_|Cs], FCs) :-
+    filter_contrato_tipo(Tipo, Cs, FCs).
+
+% predicado que calcula se a primeira data vem após a segunda
+% contratos_apos_data: Data, Data -> {V,F}
+date_is_after(D1-M1-Y1, D2-M2-Y2) :- Y1 > Y2.
+date_is_after(D1-M1-Y1, D2-M2-Y2) :- M1 > M2.
+date_is_after(D1-M1-Y1, D2-M2-Y2) :- D1 > D2.
 
 %--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do meta-predicado demo: Questao,Resposta -> {V,F}
