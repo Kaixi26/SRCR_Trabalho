@@ -479,6 +479,10 @@ remove(T) :- retract(T).
 insere(T) :- assert(T).
 insere(T) :- retract(T),!,fail.
 
+% Extensão do predicado teste
+teste([]).
+teste([H|T]) :- H, teste(T).
+
 % Extensao do predicado solucoes: F, Q, S -> {V, F}	
 
 solucoes(F, Q, S) :- findall(F, Q, S).
