@@ -479,6 +479,10 @@ remove(T) :- retract(T).
 insere(T) :- assert(T).
 insere(T) :- retract(T),!,fail.
 
+% Extensao do predicado solucoes: F, Q, S -> {V, F}	
+
+solucoes(F, Q, S) :- findall(F, Q, S).
+
 % Extensão do predicado evolução: Termo -> {V,F}
 evolucao(T):- solucoes(Inv,+T::Inv,Lista),
 			  insere(T),
