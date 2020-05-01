@@ -16,6 +16,10 @@
 :- dynamic adjudicataria/4.
 :- dynamic contrato/10.
 
+% --------------------------------------------------------------------------------
+% Definicao de predicados
+% --------------------------------------------------------------------------------
+
 % Extensão do predicado adjudicante: #IdAd, Nome, NIF, Morada -> {V, F, D}
 adjudicante(1,  'município de alto de basto',           705330336, 'portugal,braga, alto de basto').
 adjudicante(2,  'município de ponte de lima',           705330331, 'portugal,viana do castelo, ponte de lima').
@@ -91,7 +95,9 @@ contrato(19, 19, 3,  'locacao de bens moveis'   , 'consulta previa'  , 'aquisica
 contrato(20, 20, 2,  'locacao de bens moveis'   , 'ajuste direto'    , 'aquisicao de equipametos', 790    , 190, 'vizela',                30-08-2019).
 contrato(21, 21, 1,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipametos', 12345  , 789, 'vila verde',            30-09-2019).
 
-
+% --------------------------------------------------------------------------------
+% Definicao de invariantes
+% --------------------------------------------------------------------------------
 
 % Invariante : Verifica que não existe mais que um id sem clausulas desconhecidas
 +adjudicante(_, _, _, _) ::
@@ -133,6 +139,11 @@ contrato(Id, _, _, _, _, _, _, _, _, _) ::
 % Invariante : Regra dos 3 anos
 +contrato(_, Ad, Ada, _, _, Desc, _, _, _, Date) ::
     (findall(temp(Custo, Date, OldDate), contrato(_, Ad, Ada, _, _, Desc, Custo, _, _, OldDate), S), aux(S, R), add(R, V), V < 75000).
+
+
+% --------------------------------------------------------------------------------
+% Auxiliares para os invariantes
+% --------------------------------------------------------------------------------
 
 aux([], []).
 aux([temp(Custo, Date, OldDate)|T], aux(T)) :- diff_years(Date, OldDate, D), D > 2.
@@ -199,6 +210,10 @@ remElem(E, [L|Ls], [L|Lr]) :- E \= L, remElem(E, Ls, Lr).
 eqList([], []).
 eqList([L1|Ls1], [L1|Ls2]) :- eqList(Ls1, Ls2).
 eqList([L1|_], [L2|_]) :- fail.
+
+% --------------------------------------------------------------------------------
+% Queries extra para a base de conhecimento
+% --------------------------------------------------------------------------------
 
 % predicado que devolve o número total de adjudicantes
 % total_adjudicantes: Resultado -> {V,F}
@@ -336,6 +351,10 @@ contratos_prazo_abaixo(Prazo, Res) :-
     findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
     filter_contrato_prazo_abaixo(Prazo, L, Res).
 
+% --------------------------------------------------------------------------------
+% Auxiliares para as queries extra da base de conhecimento
+% --------------------------------------------------------------------------------
+
 % filtra de uma lista de contratos com apenas contratos após a data
 % filter_date_is_after: Data, Contratos, Resultado -> {V, F}
 filter_date_is_after(Date, [], []).
@@ -429,7 +448,10 @@ date_is_after(D1-M1-Y1, D2-M2-Y2) :- Y1 > Y2.
 date_is_after(D1-M1-Y1, D2-M2-Y2) :- M1 > M2.
 date_is_after(D1-M1-Y1, D2-M2-Y2) :- D1 > D2.
 
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
+% --------------------------------------------------------------------------------
+% Extensoes para conhecimento incerto
+% --------------------------------------------------------------------------------
+
 % Extensao do meta-predicado demo: Questao,Resposta -> {V,F}
 %                            Resposta = { verdadeiro,falso,desconhecido }
 demo( Questao,verdadeiro ) :-
@@ -440,9 +462,59 @@ demo( Questao,desconhecido ) :-
     nao( Questao ),
     nao( -Questao ).
 
-%--------------------------------- - - - - - - - - - -  -  -  -  -   -
 % Extensao do meta-predicado nao: Questao -> {V,F}
 
 nao( Questao ) :-
     Questao, !, fail.
 nao( Questao ).
+
+% --------------------------------------------------------------------------------
+% Manipulação e introdução de dados
+% --------------------------------------------------------------------------------
+
+% Extensão do predicado remove
+remove(T) :- retract(T).
+
+% Extensão do predicado insere
+insere(T) :- assert(T).
+insere(T) :- retract(T),!,fail.
+
+% Extensão do predicado evolução: Termo -> {V,F}
+evolucao(T):- solucoes(Inv,+T::Inv,Lista),
+			  insere(T),
+			  teste(Lista).
+
+% Extensão do predicado involucao: Termo -> {V,F}
+involucao(T):- solucoes(I,-T::I,Lista),
+				teste(Lista),
+				remove(T).
+
+% Extensão para adicionar um adjudicante
+% Extensão do predicado adjudicante: #IdAd, Nome, NIF, Morada -> {V, F}
+regista_adjudicante(A, B, C, D) :-
+    evolucao(adjudicante(A, B, C, D)).
+
+% Extensão para remover um adjudicante e os contratos com o seu Id
+% remove_adjudicante: Id -> {V, F}
+remove_adjudicante(Id) :-
+    involucao(adjudicante(Id,_,_,_)).
+
+% Extensão para adicionar uma adjudicataria
+% Extensão do predicado adjudicatária: #IdAda, Nome, NIF, Morada -> {V, F}
+regista_adjudicataria(A, B, C, D) :-
+    evolucao(adjudicataria(A, B, C, D)).
+
+% Extensão para remover uma adjudicataria e os contratos com o seu Id
+% remove_adjudicataria: Id -> {V, F}
+remove_adjudicataria(Id) :-
+    involucao(adjudicataria(Id,_,_,_)).
+
+% Extensão para registar um contrato
+% regista_contrato: #IdContrato, #IdAd, #IdAda, TipoDeContrato, TipoDeProcedimento, Descricão, Custo, Prazo, Local, Data -> {V, F}
+regista_contrato(A, B, C, D, E, F, G, H, I, J) :-
+    evolucao(contrato(A, B, C, D, E, F, G, H, I, J)).
+
+% Extensão para remover um contrato através do seu Id
+% remove_contrato: Id -> {V, F}
+remove_contrato(Id) :-
+    involucao(contrato(Id, _, _, _, _, _, _, _, _, _)).
