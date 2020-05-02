@@ -83,17 +83,17 @@ contrato(7,  7,  15, 'aquisicao de bens moveis' , 'consulta previa'  , 'assessor
 contrato(8,  8,  14, 'aquisicao de bens moveis' , 'ajuste direto'    , 'assessoria juridica',      30     , 280, 'melgaco',               18-08-2019).
 contrato(9,  9,  13, 'aquisicao de bens moveis' , 'concurso publico' , 'assessoria juridica',      799    , 657, 'valenca',               19-09-2017).
 contrato(10, 10, 12, 'aquisicao de bens moveis' , 'consulta previa'  , 'assessoria juridica',      8900   , 90,  'vila praia de ancora',  20-10-2018).
-contrato(11, 11, 11, 'aquisicao de bens moveis' , 'ajuste direto'    , 'aquisicao de equipametos', 1500   , 79,  'paredes de coura',      21-11-2019).
-contrato(12, 12, 10, 'aquisicao de bens moveis' , 'concurso publico' , 'aquisicao de equipametos', 6701   , 890, 'vila nova de cerveira', 22-12-2017).
-contrato(13, 13, 9,  'aquisicao de bens moveis' , 'consulta previa'  , 'aquisicao de equipametos', 30000  , 345, 'amares',                23-01-2018).
-contrato(14, 14, 8,  'aquisicao de bens moveis' , 'ajuste direto'    , 'aquisicao de equipametos', 4300   , 300, 'braga',                 24-02-2019).
-contrato(15, 15, 7,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipametos', 25700  , 265, 'barcelos',              25-03-2017).
-contrato(16, 16, 6,  'locacao de bens moveis'   , 'consulta previa'  , 'aquisicao de equipametos', 19450  , 490, 'fafe',                  26-04-2018).
-contrato(17, 17, 5,  'locacao de bens moveis'   , 'ajuste direto'    , 'aquisicao de equipametos', 3700   , 310, 'guimaraes',             27-05-2019).
-contrato(18, 18, 4,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipametos', 100000 , 123, 'esposende',             28-06-2017).
-contrato(19, 19, 3,  'locacao de bens moveis'   , 'consulta previa'  , 'aquisicao de equipametos', 9030   , 456, 'vieira do minho',       29-07-2018).
-contrato(20, 20, 2,  'locacao de bens moveis'   , 'ajuste direto'    , 'aquisicao de equipametos', 790    , 190, 'vizela',                30-08-2019).
-contrato(21, 21, 1,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipametos', 12345  , 789, 'vila verde',            30-09-2019).
+contrato(11, 11, 11, 'aquisicao de bens moveis' , 'ajuste direto'    , 'aquisicao de equipamentos', 1500   , 79,  'paredes de coura',      21-11-2019).
+contrato(12, 12, 10, 'aquisicao de bens moveis' , 'concurso publico' , 'aquisicao de equipamentos', 6701   , 890, 'vila nova de cerveira', 22-12-2017).
+contrato(13, 13, 9,  'aquisicao de bens moveis' , 'consulta previa'  , 'aquisicao de equipamentos', 30000  , 345, 'amares',                23-01-2018).
+contrato(14, 14, 8,  'aquisicao de bens moveis' , 'ajuste direto'    , 'aquisicao de equipamentos', 4300   , 300, 'braga',                 24-02-2019).
+contrato(15, 15, 7,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipamentos', 25700  , 265, 'barcelos',              25-03-2017).
+contrato(16, 16, 6,  'locacao de bens moveis'   , 'consulta previa'  , 'aquisicao de equipamentos', 19450  , 490, 'fafe',                  26-04-2018).
+contrato(17, 17, 5,  'locacao de bens moveis'   , 'ajuste direto'    , 'aquisicao de equipamentos', 3700   , 310, 'guimaraes',             27-05-2019).
+contrato(18, 18, 4,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipamentos', 100000 , 123, 'esposende',             28-06-2017).
+contrato(19, 19, 3,  'locacao de bens moveis'   , 'consulta previa'  , 'aquisicao de equipamentos', 9030   , 456, 'vieira do minho',       29-07-2018).
+contrato(20, 20, 2,  'locacao de bens moveis'   , 'ajuste direto'    , 'aquisicao de equipamentos', 790    , 190, 'vizela',                30-08-2019).
+contrato(21, 21, 1,  'locacao de bens moveis'   , 'concurso publico' , 'aquisicao de equipamentos', 12345  , 789, 'vila verde',            30-09-2019).
 
 % --------------------------------------------------------------------------------
 % Definicao de invariantes
@@ -108,7 +108,7 @@ contrato(21, 21, 1,  'locacao de bens moveis'   , 'concurso publico' , 'aquisica
     (findall(Id, demo(adjudicataria(Id, _, _, _), verdadeiro), L),
     remRep(L, Lnonrep),
     eqList(L, Lnonrep)).
-contrato(Id, _, _, _, _, _, _, _, _, _) ::
++contrato(Id, _, _, _, _, _, _, _, _, _) ::
     (findall(Id, demo(contrato(Id, _, _, _, _, _, _, _, _, _), verdadeiro), L),
     remRep(L, Lnonrep),
     eqList(L, Lnonrep)).
@@ -273,7 +273,7 @@ total_contratos_valor_acima(Valor, Res) :-
     contratos_valor_acima(Valor, L),
     length(L, Res).
 
-% predicado que devolve o número total de contratos com valor acima de
+% predicado que devolve o número total de contratos com valor abaixo de
 % total_contratos_abaixo: Valor, Resultado -> {V,F}
 total_contratos_valor_abaixo(Valor, Res) :- 
     contratos_valor_abaixo(Valor, L),
@@ -297,7 +297,7 @@ contratos_apos(Date, Res) :-
     findall(contrato(A, B, C, D, E, F, G, H, I, CDate), demo(contrato(A, B, C, D, E, F, G, H, I, CDate), verdadeiro), L),
     filter_date_is_after(Date, L, Res).
 
-% predicado que devolve contratos apos uma data
+% predicado que devolve contratos antes de uma data
 % contratos_apos_data: Data, Resultado -> {V,F}
 contratos_antes(Date, Res) :-
     findall(contrato(A, B, C, D, E, F, G, H, I, CDate), demo(contrato(A, B, C, D, E, F, G, H, I, CDate), verdadeiro), L),
@@ -345,7 +345,7 @@ contratos_prazo_acima(Prazo, Res) :-
     findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
     filter_contrato_prazo_acima(Prazo, L, Res).
 
-% predicado que devolve contratos acima de um prazo
+% predicado que devolve contratos abaixo de um prazo
 % contratos_prazo_abaixo: Prazo, Resultado -> {V,F}
 contratos_prazo_abaixo(Prazo, Res) :-
     findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
