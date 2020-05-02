@@ -11,6 +11,7 @@
 
 % PROLOG declarations
 
+:- dynamic '-'/1.
 :- op( 900,xfy,'::' ).
 :- dynamic adjudicante/4.
 :- dynamic adjudicataria/4.
@@ -133,7 +134,7 @@ contrato(21, 21, 1,  'locacao de bens moveis'   , 'concurso publico' , 'aquisica
 
 % Invariante : Contrato por ajuste direto tem que ter prazo ate 1 ano
 +contrato(_, _, _, _, _, _, _, _, _, _) ::
-    (findall(Pzo, contrato(_, _, _, _, 'ajuste direto', _, _, Pzo, _, _), L),
+    (findall(Pzo, demo(contrato(_, _, _, _, 'ajuste direto', _, _, Pzo, _, _), verdadeiro), L),
     lesseq_than(365, L)).
 
 % Invariante : Regra dos 3 anos
@@ -526,3 +527,67 @@ regista_contrato(A, B, C, D, E, F, G, H, I, J) :-
 % remove_contrato: Id -> {V, F}
 remove_contrato(Id) :-
     involucao(contrato(Id, _, _, _, _, _, _, _, _, _)).
+
+
+% --------------------------------------------------------------------------------
+% Extensões de conhecimento incerto relativos aos dados
+% --------------------------------------------------------------------------------
+
+-adjudicante(A, B, C, D) :-
+    \+ adjudicante(A, B, C, D),
+    \+ excecao(adjudicante(A, B, C, D)).
+
+-adjudicataria(A, B, C, D) :-
+    \+ adjudicante(A, B, C, D),
+    \+ excecao(adjudicante(A, B, C, D)).
+
+-contrato(A, B, C, D, E, F, G, H, I, J) :-
+    \+ contrato(A, B, C, D, E, F, G, H, I, J),
+    \+ excecao(contrato(A, B, C, D, E, F, G, H, I, J)).
+
+% --------------------------------------------------------------------------------
+% Conhecimento Incerto
+% --------------------------------------------------------------------------------
+
+adjudicante(22, 'município de alto de basto', 705331234, morada_desconhecida).
+adjudicante(23, 'município de ponte de lima', 705334567, morada_desconhecida).
+
+excecao(adjudicante(A, B, C, D)) :-
+    adjudicante(A, B, C, morada_desconhecida).
+
+
+adjudicataria(22,  'xxx - associados - sociedade de advogados, sp, rl.',     702671234, 'portugal').
+adjudicataria(23,  'xxx - associados - sociedade de professores, sp, rl.',   702679876, 'portugal').
+
+excecao(adjudicataria(A, B, C, D)) :-
+    adjudicataria(A, B, C, morada_desconhecida).
+
+
+contrato(22, 1, 21, 'aquisicao de servicos', 'consulta previa', 'assessoria juridica', 13599, 547, local_desconhecido, 11-01-2020).
+contrato(23, 1, 21, 'aquisicao de servicos', 'consulta previa', 'assessoria juridica', 13599, 547, local_desconhecido, 11-01-2020).
+
+excecao(contrato(A, B, C, D, E, F, G, H, I, J)) :-
+    contrato(A, B, C, D, E, F, G, H, local_desconhecido, J).
+
+% --------------------------------------------------------------------------------
+% Conhecimento Impreciso
+% --------------------------------------------------------------------------------
+
+excecao(adjudicante(24, 'município de alto de basto', 705331234, 'portugal,braga, alto de basto')).
+excecao(adjudicante(24, 'município de alto de basto', 705331234, 'portugal,viana do castelo, ponte de lima')).
+
+
+excecao(adjudicataria(24,  'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal,braga, alto de basto')).
+excecao(adjudicataria(24,  'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal,viana do castelo, ponte de lima')).
+
+
+excecao(contrato(24, 1, 21, 'aquisicao de servicos', 'consulta previa', 'assessoria juridica', 13599, 547, 'portugal,braga, alto de basto' , 11-01-2020)).
+excecao(contrato(24, 1, 21, 'aquisicao de servicos', 'consulta previa', 'assessoria juridica', 13599, 547, 'portugal,viana do castelo, ponte de lima', 11-01-2020)).
+
+% -------------------------------------------------------------------------------------------------
+%   Conhecimento Interdito
+% -------------------------------------------------------------------------------------------------
+
+contrato(25, 21, 1, 'locacao de bens moveis', 'concurso publico', 'aquisicao de equipamentos', 12345, prazo_contrato_nulo, 'vila verde', 30-09-2019).
+nulo(prazo_contrato_nulo).
+excecao(contrato(A, B, C, D, E, F, G, H, I, J)) :- contrato(A, B, C, D, E, F, G, prazo_contrato_nulo, I, J).
