@@ -299,7 +299,7 @@ contratos_apos(Date, Res) :-
     filter_date_is_after(Date, L, Res).
 
 % predicado que devolve contratos antes de uma data
-% contratos_apos_data: Data, Resultado -> {V,F}
+% contratos_antes_data: Data, Resultado -> {V,F}
 contratos_antes(Date, Res) :-
     findall(contrato(A, B, C, D, E, F, G, H, I, CDate), demo(contrato(A, B, C, D, E, F, G, H, I, CDate), verdadeiro), L),
     filter_date_is_before(Date, L, Res).
@@ -311,7 +311,7 @@ contratos_adjudicante(IdAd, Res) :-
     filter_contrato_adjudicante(IdAd, L, Res).
 
 % predicado que devolve contratos de uma adjudicataria
-% contratos_adjudicante: IdAd, Resultado -> {V,F}
+% contratos_adjudicataria: IdAd, Resultado -> {V,F}
 contratos_adjudicataria(IdAd, Res) :-
     findall(contrato(A, B, C, D, E, F, G, H, I, J), demo(contrato(A, B, C, D, E, F, G, H, I, J), verdadeiro), L),
     filter_contrato_adjudicataria(IdAd, L, Res).
