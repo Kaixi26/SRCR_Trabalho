@@ -446,8 +446,8 @@ filter_contrato_prazo_abaixo(Prazo, [_|Cs], FCs) :-
 % predicado que calcula se a primeira data vem após a segunda
 % contratos_apos_data: Data, Data -> {V,F}
 date_is_after(D1-M1-Y1, D2-M2-Y2) :- Y1 > Y2.
-date_is_after(D1-M1-Y1, D2-M2-Y2) :- M1 > M2.
-date_is_after(D1-M1-Y1, D2-M2-Y2) :- D1 > D2.
+date_is_after(D1-M1-Y1, D2-M2-Y2) :- Y1 =:= Y2, M1 > M2.
+date_is_after(D1-M1-Y1, D2-M2-Y2) :- Y1 =:= Y2, M1 =:= M2, D1 > D2.
 
 % --------------------------------------------------------------------------------
 % Extensoes para conhecimento incerto
