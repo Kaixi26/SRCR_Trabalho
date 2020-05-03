@@ -429,6 +429,7 @@ filter_contrato_valor_abaixo(Tipo, [_|Cs], FCs) :-
 % filter_contrato_prazo_acima: Prazo, Contratos, Resultado -> {V, F}
 filter_contrato_prazo_acima(Prazo, [], []).
 filter_contrato_prazo_acima(Prazo, [contrato(A, B, C, D, E, F, G, Pzo, I, J)|Cs], [contrato(A, B, C, D, E, F, G, Pzo, I, J)|FCs]) :-
+    number(Pzo),
     Prazo < Pzo,
     filter_contrato_prazo_acima(Prazo, Cs, FCs).
 filter_contrato_prazo_acima(Prazo, [_|Cs], FCs) :-
@@ -438,6 +439,7 @@ filter_contrato_prazo_acima(Prazo, [_|Cs], FCs) :-
 % filter_contrato_prazo_abaixo: Prazo, Contratos, Resultado -> {V, F}
 filter_contrato_prazo_abaixo(Prazo, [], []).
 filter_contrato_prazo_abaixo(Prazo, [contrato(A, B, C, D, E, F, G, Pzo, I, J)|Cs], [contrato(A, B, C, D, E, F, G, Pzo, I, J)|FCs]) :-
+    number(Pzo),
     Pzo < Prazo,
     filter_contrato_prazo_abaixo(Prazo, Cs, FCs).
 filter_contrato_prazo_abaixo(Prazo, [_|Cs], FCs) :-
