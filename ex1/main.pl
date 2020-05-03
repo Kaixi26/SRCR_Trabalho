@@ -532,7 +532,7 @@ remove_contrato(Id) :-
 
 
 % --------------------------------------------------------------------------------
-% Extensões de conhecimento incerto relativos aos dados
+% Extensões de conhecimento imperfeito relativos aos dados
 % --------------------------------------------------------------------------------
 
 -adjudicante(A, B, C, D) :-
@@ -575,14 +575,17 @@ excecao(contrato(A, B, C, D, E, F, G, H, I, J)) :-
 % Conhecimento Impreciso
 % --------------------------------------------------------------------------------
 
+adjudicante(24, 'município de alto de basto', 705331234, morada_imprecisa).
 excecao(adjudicante(24, 'município de alto de basto', 705331234, 'portugal,braga, alto de basto')).
 excecao(adjudicante(24, 'município de alto de basto', 705331234, 'portugal,viana do castelo, ponte de lima')).
 
 
+adjudicataria(24,  'xxx - associados - sociedade de advogados, sp, rl.', 702675112, morada_imprecisa).
 excecao(adjudicataria(24,  'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal,braga, alto de basto')).
 excecao(adjudicataria(24,  'xxx - associados - sociedade de advogados, sp, rl.', 702675112, 'portugal,viana do castelo, ponte de lima')).
 
 
+contrato(24, 1, 21, 'aquisicao de servicos', 'consulta previa', 'assessoria juridica', 13599, 547, local_impreciso , 11-01-2020).
 excecao(contrato(24, 1, 21, 'aquisicao de servicos', 'consulta previa', 'assessoria juridica', 13599, 547, 'portugal,braga, alto de basto' , 11-01-2020)).
 excecao(contrato(24, 1, 21, 'aquisicao de servicos', 'consulta previa', 'assessoria juridica', 13599, 547, 'portugal,viana do castelo, ponte de lima', 11-01-2020)).
 
